@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SmartBuy AI Store</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <h2>🛍️ SmartBuy AI</h2>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/cart">Cart</a>
+        </div>
+    </div>
+
+    <form method="GET" action="/" class="search-box">
+        <input
+            type="text"
+            name="search"
+            placeholder="Search products..."
+        >
+        <button type="submit">Search</button>
+    </form>
+
+    <div class="container">
+        <h2 class="section-title">🔥 Live Shopping Results</h2>
+
+        <div class="category-bar">
+
+            <a href="/?search=laptop"
+               class="{% if active_category=='laptop' %}active{% endif %}">
+                💻 Laptop
+            </a>
+
+            <a href="/?search=mobile"
+               class="{% if active_category=='mobile' %}active{% endif %}">
+                📱 Mobile
+            </a>
+
+            <a href="/?search=headphones"
+               class="{% if active_category=='headphones' %}active{% endif %}">
+                🎧 Headphones
+            </a>
+
+            <a href="/?search=tv"
+               class="{% if active_category=='tv' %}active{% endif %}">
+                📺 TV
+            </a>
+
+            <a href="/?search=home appliances"
+               class="{% if active_category=='home appliances' %}active{% endif %}">
+                🏠 Home Appliances
+            </a>
+
+            <a href="/?search=shoes"
+               class="{% if active_category=='shoes' %}active{% endif %}">
+                👟 Shoes
+            </a>
+
+            <a href="/?search=makeup"
+               class="{% if active_category=='makeup' %}active{% endif %}">
+                💄 Makeup
+            </a>
+
+        </div>
+    </div>
+
+    <div class="product-grid">
+
+        {% for product in products %}
+
+        <div class="product-card">
+
+            <div class="badge">🤖 Live API Product</div>
+
+            <img src="{{ product.Image }}">
+
+            <h3>{{ product.Product_Name }}</h3>
+
+            <p class="price">
+                ₹{{ product.Current_Price }}
+            </p>
+
+            <a href="/product/{{ product.id }}" class="btn">
+                View Details
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</body>
+
+</html>
