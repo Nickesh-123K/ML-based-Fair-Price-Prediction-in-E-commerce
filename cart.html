@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cart</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <h2>🛍️ SmartBuy AI</h2>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/cart">Cart</a>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <h2 class="cart-title">🛒 Your Cart</h2>
+
+        {% if cart_items|length == 0 %}
+
+        <div class="empty-cart">
+            <h3>🛒 Your cart is empty</h3>
+
+            <a href="/" class="btn">
+                Browse Products
+            </a>
+        </div>
+
+        {% else %}
+
+        <div class="cart-grid">
+
+            {% for item in cart_items %}
+
+            <div class="cart-card">
+
+                <img
+                    src="{{ item.Image }}"
+                    class="cart-img"
+                >
+
+                <div class="cart-info">
+
+                    <h3>{{ item.Product_Name }}</h3>
+
+                    <p class="price">
+                        ₹{{ item.Current_Price }}
+                    </p>
+
+                    <p>
+                        Qty: {{ item.quantity if item.quantity is defined else 1 }}
+                    </p>
+
+                    <!-- QUANTITY CONTROLS -->
+
+                    <div class="qty-box">
+
+                        <a href="/decrease/{{ item.id }}">
+                            ➖
+                        </a>
+
+                        <span>
+                            {{ item.get('quantity', 1) }}
+                        </span>
+
+                        <a href="/increase/{{ item.id }}">
+                            ➕
+                        </a>
+
+                    </div>
+
+                    <a
+                        href="/remove_from_cart/{{ item.id }}"
+                        class="remove-btn"
+                    >
+                        Remove
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- TOTAL + BUY -->
+
+        <div class="cart-summary">
+
+            <h2>
+                Total: ₹{{ total }}
+            </h2>
+
+            <a href="/buy" class="buy-btn">
+                🛍️ Buy Now
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
