@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Product Details</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <h2>🛍️ SmartBuy AI</h2>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/cart">Cart</a>
+        </div>
+    </div>
+
+    <div class="product-container">
+
+        <div class="ai-badge">
+            🤖 AI Verified Product
+        </div>
+
+        <h2>{{ product.Product_Name }}</h2>
+
+        <img
+            src="{{ product.Image }}"
+            class="product-img"
+        >
+
+        <p class="current-price">
+            Current: ₹{{ current_price }}
+        </p>
+
+        <p class="fair-price">
+            Fair: ₹{{ predicted_price }}
+        </p>
+
+        <p class="status {{ status|lower|replace(' ','') }}">
+            Status: {{ status }}
+        </p>
+
+        <div class="action-box">
+            <a href="/add_to_cart/{{ product.id }}" class="cart-btn">
+                🛒 Add to Cart
+            </a>
+        </div>
+
+    </div>
+
+    <div class="analysis-box">
+
+        <h3>📊 Live Market Intelligence</h3>
+
+        <p>
+            <strong>Market Average:</strong>
+            ₹{{ analysis.market_avg }}
+        </p>
+
+        <p>
+            <strong>Lowest Price:</strong>
+            ₹{{ analysis.market_min }}
+        </p>
+
+        <p>
+            <strong>Highest Price:</strong>
+            ₹{{ analysis.market_max }}
+        </p>
+
+        <hr>
+
+        <p>
+            <strong>Predicted Fair Price:</strong>
+            ₹{{ analysis.predicted_fair_price }}
+        </p>
+
+        <p>
+            <strong>Status:</strong>
+            {{ price_recommendation.status }}
+        </p>
+
+        <p>
+            <strong>Difference:</strong>
+            {{ price_recommendation.difference_percent }}%
+        </p>
+
+        <p>
+            <strong>Advice:</strong>
+            {{ price_recommendation.advice }}
+        </p>
+
+    </div>
+
+</body>
+
+</html>
